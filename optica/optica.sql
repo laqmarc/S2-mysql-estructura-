@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2022 a las 11:20:30
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -28,13 +19,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `clients` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `nom` varchar(45) NOT NULL,
   `adress` varchar(100) NOT NULL,
   `telefon` int(9) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `data_registre` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `id_client_recomanat` int(11) DEFAULT NULL
+  `id_client_recomanat` int(11) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -70,7 +61,7 @@ INSERT INTO `clients` (`id`, `nom`, `adress`, `telefon`, `email`, `data_registre
 --
 
 CREATE TABLE `empleats` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `nom` varchar(45) NOT NULL,
   `data_registre` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -90,7 +81,7 @@ INSERT INTO `empleats` (`id`, `nom`, `data_registre`) VALUES
 --
 
 CREATE TABLE `proveidors` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `nom` varchar(45) NOT NULL,
   `carrer` varchar(45) NOT NULL,
   `numero` int(5) NOT NULL,
@@ -140,7 +131,7 @@ INSERT INTO `proveidors` (`id`, `nom`, `carrer`, `numero`, `pis`, `porta`, `ciut
 --
 
 CREATE TABLE `ulleres` (
-  `id` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `marca` varchar(45) NOT NULL,
   `graduacio_left` float NOT NULL,
   `graduacio_right` float NOT NULL,
@@ -149,7 +140,7 @@ CREATE TABLE `ulleres` (
   `vidre_left_color` varchar(45) NOT NULL,
   `vidre_right_color` varchar(45) NOT NULL,
   `preu` float NOT NULL,
-  `id_proveidor` int(11) NOT NULL
+  `id_proveidor` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -180,9 +171,9 @@ INSERT INTO `ulleres` (`id`, `marca`, `graduacio_left`, `graduacio_right`, `munt
 --
 
 CREATE TABLE `ventes` (
-  `id` int(11) NOT NULL,
-  `id_client` int(11) NOT NULL,
-  `id_empleat` int(11) NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_client` int(11) UNSIGNED NOT NULL,
+  `id_empleat` int(11) UNSIGNED NOT NULL,
   `data_venta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -203,10 +194,10 @@ INSERT INTO `ventes` (`id`, `id_client`, `id_empleat`, `data_venta`) VALUES
 --
 
 CREATE TABLE `ventes_detall` (
-  `id` int(11) NOT NULL,
-  `id_ulleres` int(11) NOT NULL,
-  `cantitat` int(11) NOT NULL,
-  `id_ventes` int(11) NOT NULL
+  `id` int(11) UNSIGNED NOT NULL,
+  `id_ulleres` int(11) UNSIGNED NOT NULL,
+  `cantitat` int(11) UNSIGNED NOT NULL,
+  `id_ventes` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -272,37 +263,37 @@ ALTER TABLE `ventes_detall`
 -- AUTO_INCREMENT de la tabla `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT de la tabla `empleats`
 --
 ALTER TABLE `empleats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `proveidors`
 --
 ALTER TABLE `proveidors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `ulleres`
 --
 ALTER TABLE `ulleres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `ventes`
 --
 ALTER TABLE `ventes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `ventes_detall`
 --
 ALTER TABLE `ventes_detall`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas

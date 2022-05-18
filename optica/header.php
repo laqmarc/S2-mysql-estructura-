@@ -14,7 +14,7 @@
                     <li><a href="afegir_proveidor.php">Afegir Proveidor</a></li>
                     <li><a href="afegir_ulleres.php">Afegir Ulleres</a></li>
                     <li><a href="afegir_client.php">Afegir Client</a></li>
-                    <li><a href="#">Afegir una compra</a></li>
+                    <li><a href="#">TODO - Afegir una compra</a></li>
                     <li><a href="llistar_proveidor.php">Llistar Proveidor</a></li>
                     <li><a href="llistar_ulleres.php">Llistar Ulleres</a></li>
                     <li><a href="llistar_clients.php">Llistar Clients</a></li>
