@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2022 a las 12:06:40
+-- Tiempo de generación: 19-05-2022 a las 10:24:46
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.12
 
@@ -71,30 +71,6 @@ INSERT INTO `location` (`id`, `name`, `id_state`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `order`
---
-
-CREATE TABLE `order` (
-  `id` int(11) NOT NULL,
-  `order_type` enum('take_away','delivery') NOT NULL,
-  `id_customer` int(11) NOT NULL,
-  `id_dhop` int(11) NOT NULL,
-  `id_worker` int(11) NOT NULL,
-  `order_time_creation` timestamp NOT NULL DEFAULT current_timestamp(),
-  `order_customer_recived` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `order`
---
-
-INSERT INTO `order` (`id`, `order_type`, `id_customer`, `id_dhop`, `id_worker`, `order_time_creation`, `order_customer_recived`) VALUES
-(3, 'take_away', 1, 1, 1, '2022-05-16 13:14:46', '2022-05-16 15:13:49'),
-(4, 'delivery', 2, 2, 4, '2022-05-16 13:15:14', '2022-05-16 15:14:49');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `order_detail`
 --
 
@@ -110,10 +86,35 @@ CREATE TABLE `order_detail` (
 --
 
 INSERT INTO `order_detail` (`id`, `order_id`, `product_id`, `product_quantity`) VALUES
-(5, 4, 1, 1),
+(5, 4, 1, 3),
 (6, 4, 4, 1),
 (7, 3, 1, 2),
-(8, 3, 2, 2);
+(8, 3, 2, 2),
+(9, 3, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `order_general`
+--
+
+CREATE TABLE `order_general` (
+  `id` int(11) NOT NULL,
+  `order_type` enum('take_away','delivery') NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `id_shop` int(11) NOT NULL,
+  `id_worker` int(11) NOT NULL,
+  `order_time_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `order_customer_recived` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `order_general`
+--
+
+INSERT INTO `order_general` (`id`, `order_type`, `id_customer`, `id_shop`, `id_worker`, `order_time_creation`, `order_customer_recived`) VALUES
+(3, 'take_away', 1, 1, 1, '2022-05-16 13:14:46', '2022-05-16 15:13:49'),
+(4, 'delivery', 2, 2, 4, '2022-05-16 13:15:14', '2022-05-16 15:14:49');
 
 -- --------------------------------------------------------
 
@@ -249,21 +250,21 @@ ALTER TABLE `location`
   ADD KEY `id_state` (`id_state`);
 
 --
--- Indices de la tabla `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `ccc` (`id_customer`),
-  ADD KEY `shoooop` (`id_dhop`),
-  ADD KEY `worker` (`id_worker`);
-
---
 -- Indices de la tabla `order_detail`
 --
 ALTER TABLE `order_detail`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orderid` (`order_id`),
   ADD KEY `producte` (`product_id`);
+
+--
+-- Indices de la tabla `order_general`
+--
+ALTER TABLE `order_general`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ccc` (`id_customer`),
+  ADD KEY `shoooop` (`id_shop`),
+  ADD KEY `worker` (`id_worker`);
 
 --
 -- Indices de la tabla `products`
@@ -315,16 +316,16 @@ ALTER TABLE `location`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de la tabla `order`
---
-ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT de la tabla `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `order_general`
+--
+ALTER TABLE `order_general`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -373,19 +374,19 @@ ALTER TABLE `location`
   ADD CONSTRAINT `id_state` FOREIGN KEY (`id_state`) REFERENCES `state` (`id`);
 
 --
--- Filtros para la tabla `order`
---
-ALTER TABLE `order`
-  ADD CONSTRAINT `ccc` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `shoooop` FOREIGN KEY (`id_dhop`) REFERENCES `shops` (`id`),
-  ADD CONSTRAINT `worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id`);
-
---
 -- Filtros para la tabla `order_detail`
 --
 ALTER TABLE `order_detail`
-  ADD CONSTRAINT `orderid` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
+  ADD CONSTRAINT `orderid` FOREIGN KEY (`order_id`) REFERENCES `order_general` (`id`),
   ADD CONSTRAINT `producte` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Filtros para la tabla `order_general`
+--
+ALTER TABLE `order_general`
+  ADD CONSTRAINT `ccc` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`),
+  ADD CONSTRAINT `shoooop` FOREIGN KEY (`id_shop`) REFERENCES `shops` (`id`),
+  ADD CONSTRAINT `worker` FOREIGN KEY (`id_worker`) REFERENCES `workers` (`id`);
 
 --
 -- Filtros para la tabla `products`
